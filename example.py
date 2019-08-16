@@ -1,14 +1,12 @@
-from Robinhood import Robinhood
+import robin_stocks
 import sys
 
-robinhood = None
-
 def login():
-    robinhood = Robinhood()
     username = input('Enter robinhood username: ')
     password = input('Enter robinhood password: ')
     try:
-        robinhood.login(username=username, password=password)
+        device_id = robin_stocks.get_new_device_token(username, password)
+        robin_stocks.login(username, password, device_id)
     except:
         error = sys.exc_info()[0]
         print(f'[LOGIN] {error}')
